@@ -10,7 +10,10 @@ let curFPS: number;
 
 const getFPS = () =>
   requestAnimationFrame((t1) =>
-    requestAnimationFrame((t2) => (curFPS = 1000 / (t2 - t1))),
+    requestAnimationFrame((t2) => {
+        curFPS = 1000 / (t2 - t1)
+        cnt += 1 / curFPS;
+    }),
   );
 
 document.title = gameName;
@@ -24,6 +27,7 @@ let countdisplay = document.createElement("h2");
 countdisplay.innerHTML = "Number of christmas has passed: 0";
 mainbt.addEventListener("click", function () {
   cnt++;
+
   countdisplay.innerHTML = 
     "Number of christmas has passed: " + Math.round(cnt).toString();
 });
@@ -38,7 +42,6 @@ counter.append(countdisplay);
 
 function adder() {
   getFPS();
-  cnt += 1 / curFPS;
   countdisplay.innerHTML =
     "Number of christmas has passed: " + Math.round(cnt).toString();
   requestAnimationFrame(adder);
