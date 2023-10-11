@@ -45,5 +45,5 @@ function adder() {
   });
   countdisplay.innerHTML =
     "Number of christmas has passed: " + Math.round(cnt).toString();
-    requestAnimationFrame(adder);
+  requestAnimationFrame(adder);
 }
