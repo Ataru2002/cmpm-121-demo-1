@@ -9,10 +9,8 @@ let cnt: number = 0.0;
 let curFPS: number;
 
 const getFPS = () =>
-  new Promise((resolve) =>
-    requestAnimationFrame((t1) =>
-      requestAnimationFrame((t2) => resolve(1000 / (t2 - t1))),
-    ),
+  requestAnimationFrame((t1) =>
+    requestAnimationFrame((t2) => (curFPS = 1000 / (t2 - t1))),
   );
 
 document.title = gameName;
@@ -26,7 +24,7 @@ let countdisplay = document.createElement("h2");
 countdisplay.innerHTML = "Number of christmas has passed: 0";
 mainbt.addEventListener("click", function () {
   cnt++;
-  countdisplay.innerHTML =
+  countdisplay.innerHTML = 
     "Number of christmas has passed: " + Math.round(cnt).toString();
 });
 
@@ -39,10 +37,8 @@ app.append(mainbt);
 counter.append(countdisplay);
 
 function adder() {
-  getFPS().then((result) => {
-    curFPS = result;
-    cnt += 1 / curFPS;
-  });
+  getFPS();
+  cnt += 1 / curFPS;
   countdisplay.innerHTML =
     "Number of christmas has passed: " + Math.round(cnt).toString();
   requestAnimationFrame(adder);
