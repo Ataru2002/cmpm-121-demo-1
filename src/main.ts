@@ -1,10 +1,12 @@
 import "./style.css";
 
+//setup divs
 const app: HTMLDivElement = document.querySelector("#app")!;
 const counter: HTMLDivElement = document.querySelector("#counter")!;
 
-const gameName = "Nhan's Game";
+const gameName = "Christmas Breezer";
 
+//variables
 let cnt: number = 0.0;
 let growth: number = 0;
 let lastMill: number = 0;
@@ -14,9 +16,9 @@ let upgradecnt3: number = 0;
 let price1: number = 10;
 let price2: number = 100;
 let price3: number = 1000;
-
 document.title = gameName;
 
+//button names
 const mainbt: HTMLButtonElement = document.createElement("button");
 const growbt: HTMLButtonElement = document.createElement("button");
 const growbt2: HTMLButtonElement = document.createElement("button");
@@ -41,6 +43,7 @@ growbt3.type = "button";
 growbt3.textContent = "Ultra Ornament (1000 Christmas): +50 Christmas / Year";
 growbt3.disabled = true;
 
+//Texts setups
 let countdisplay = document.createElement("h2");
 let countrate = document.createElement("h2.1");
 let upgrade1 = document.createElement("h2.2");
@@ -53,6 +56,7 @@ upgrade1.innerHTML = "Regular Ornament purchased: 0";
 upgrade2.innerHTML = "Super Ornament purchased: 0";
 upgrade3.innerHTML = "Ultra Ornament purchased: 0";
 
+//button listeners
 mainbt.addEventListener("click", function () {
   cnt++;
   countdisplay.innerHTML =
@@ -96,9 +100,11 @@ growbt3.addEventListener("click", function () {
   upgrade3.innerHTML = "Ultra Ornament purchased: " + upgradecnt3.toString();
 });
 
+//Update runners
 requestAnimationFrame(adder);
 requestAnimationFrame(checker);
 
+//Displaying
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
@@ -118,6 +124,7 @@ linebr = document.createElement("br");
 counter.appendChild(linebr);
 counter.append(upgrade3);
 
+//add to the value
 function adder(Millis: number) {
   const delta = Millis - lastMill;
   cnt += growth / (1000 / delta);
@@ -127,6 +134,7 @@ function adder(Millis: number) {
   requestAnimationFrame(adder);
 }
 
+//Checking buttons enabling
 function checker() {
   if (cnt >= price1) {
     growbt.disabled = false;
