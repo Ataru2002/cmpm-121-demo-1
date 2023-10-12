@@ -7,16 +7,7 @@ const gameName = "Nhan's Game";
 
 let cnt: number = 0.0;
 let growth: number = 0;
-let curFPS: number;
 let lastMill: number = 0;
-
-const getFPS = () =>
-  requestAnimationFrame((t1) =>
-    requestAnimationFrame((t2) => {
-      curFPS = 1000 / (t2 - t1);
-      cnt += growth / curFPS;
-    }),
-  );
 
 document.title = gameName;
 
@@ -63,7 +54,6 @@ counter.append(countdisplay);
 
 function adder(Millis : number) {
   const delta = Millis - lastMill;
-  console.log(1000 / delta);
   cnt += growth / (1000 / delta);
   countdisplay.innerHTML =
     "Number of christmas has passed: " + Math.round(cnt).toString();
