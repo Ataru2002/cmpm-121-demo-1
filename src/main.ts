@@ -8,16 +8,15 @@ const gameName = "Nhan's Game";
 let cnt: number = 0.0;
 let growth: number = 0;
 let curFPS: number;
+let lastMill: number = 0;
 
 const getFPS = () =>
   requestAnimationFrame((t1) =>
     requestAnimationFrame((t2) => {
       curFPS = 1000 / (t2 - t1);
-      cnt += (growth) / curFPS;
+      cnt += growth / curFPS;
     }),
   );
-
-
 
 document.title = gameName;
 
@@ -32,12 +31,11 @@ growbt.type = "button";
 growbt.textContent = "purchase upgrade";
 growbt.disabled = true;
 
-
 let countdisplay = document.createElement("h2");
 countdisplay.innerHTML = "Number of christmas has passed: 0";
 mainbt.addEventListener("click", function () {
   cnt++;
-  countdisplay.innerHTML = 
+  countdisplay.innerHTML =
     "Number of christmas has passed: " + Math.round(cnt).toString();
   if (cnt >= 10) {
     growbt.disabled = false;
@@ -51,8 +49,6 @@ growbt.addEventListener("click", function () {
   growth++;
 });
 
-
-
 requestAnimationFrame(adder);
 requestAnimationFrame(checker);
 
@@ -63,14 +59,19 @@ app.append(mainbt);
 app.append(growbt);
 counter.append(countdisplay);
 
-function adder() {
-  getFPS();
+
+
+function adder(Millis : number) {
+  const delta = Millis - lastMill;
+  console.log(1000 / delta);
+  cnt += growth / (1000 / delta);
   countdisplay.innerHTML =
     "Number of christmas has passed: " + Math.round(cnt).toString();
+  lastMill = Millis;
   requestAnimationFrame(adder);
 }
 
-function checker(){
+function checker() {
   if (cnt >= 10) {
     growbt.disabled = false;
   } else {
