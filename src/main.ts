@@ -166,7 +166,7 @@ growbt3.addEventListener("click", function () {
 requestAnimationFrame(adder);
 requestAnimationFrame(checker);
 
-//Displaying
+//Displaying the text and buttons
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
