@@ -7,15 +7,36 @@ const counter: HTMLDivElement = document.querySelector("#counter")!;
 const gameName = "Christmas Breezer";
 
 //variables
+interface Item {
+  name: string;
+  cost: number;
+  rate: number;
+  upgradecnt: number;
+}
+const availableItems: Item[] = [
+  {
+    name: "Regular Ornament",
+    cost: 10,
+    rate: 0.1,
+    upgradecnt: 0,
+  },
+  {
+    name: "Super Ornament",
+    cost: 100,
+    rate: 2,
+    upgradecnt: 0,
+  },
+  {
+    name: "Ultra Ornament",
+    cost: 1000,
+    rate: 2,
+    upgradecnt: 0,
+  },
+];
+
 let cnt: number = 0.0;
 let growth: number = 0;
 let lastMill: number = 0;
-let upgradecnt1: number = 0;
-let upgradecnt2: number = 0;
-let upgradecnt3: number = 0;
-let price1: number = 10;
-let price2: number = 100;
-let price3: number = 1000;
 document.title = gameName;
 
 //button names
@@ -30,17 +51,38 @@ mainbt.textContent = "click the Christmas Tree 🎄";
 
 growbt.className = "growButton";
 growbt.type = "button";
-growbt.textContent = "Regular Ornament (10 Christmas): +0.1 Christmas / Year";
+growbt.textContent =
+  availableItems[0].name +
+  " (" +
+  availableItems[0].cost +
+  " Christmas): " +
+  "+" +
+  availableItems[0].rate +
+  " Christmas/Year";
 growbt.disabled = true;
 
 growbt2.className = "growButton2";
 growbt2.type = "button";
-growbt2.textContent = "Super Ornament (100 Christmas): +2 Christmas / Year";
+growbt2.textContent =
+  availableItems[1].name +
+  " (" +
+  availableItems[1].cost +
+  " Christmas): " +
+  "+" +
+  availableItems[1].rate +
+  " Christmas/Year";
 growbt2.disabled = true;
 
 growbt3.className = "growButton";
 growbt3.type = "button";
-growbt3.textContent = "Ultra Ornament (1000 Christmas): +50 Christmas / Year";
+growbt3.textContent =
+  availableItems[2].name +
+  " (" +
+  availableItems[2].cost +
+  " Christmas): " +
+  "+" +
+  availableItems[2].rate +
+  " Christmas/Year";
 growbt3.disabled = true;
 
 //Texts setups
@@ -64,40 +106,60 @@ mainbt.addEventListener("click", function () {
 });
 
 growbt.addEventListener("click", function () {
-  cnt -= price1;
+  cnt -= availableItems[0].cost;
   growth += 0.1;
-  upgradecnt1++;
-  price1 *= 1.15;
-  growbt.textContent = "Regular Ornament (" + price1.toFixed(2) + " Christmas): +0.1 Christmas/Year"; 
+  availableItems[0].upgradecnt++;
+  availableItems[0].cost *= 1.15;
+  growbt.textContent =
+    availableItems[0].name +
+    " (" +
+    availableItems[0].cost.toFixed(2) +
+    " Christmas): " +
+    "+" +
+    availableItems[0].rate +
+    " Christmas/Year";
   countrate.innerHTML =
     "Christmas pass rate: " + growth.toFixed(1) + " Christmas/Year";
-  upgrade1.innerHTML = "Regular Ornament purchased: " + upgradecnt1.toString();
+  upgrade1.innerHTML =
+    "Regular Ornament purchased: " + availableItems[0].upgradecnt.toString();
 });
 
 growbt2.addEventListener("click", function () {
-  cnt -= price2;
+  cnt -= availableItems[1].cost;
   growth += 2;
-  upgradecnt2++;
-  price2 *= 1.15;
+  availableItems[1].upgradecnt++;
+  availableItems[1].cost *= 1.15;
   growbt2.textContent =
-    "Super Ornament (" +
-    price2.toFixed(2) +
-    " Christmas): +2 Christmas/Year"; 
+    availableItems[1].name +
+    " (" +
+    availableItems[1].cost.toFixed(2) +
+    " Christmas): " +
+    "+" +
+    availableItems[1].rate +
+    " Christmas/Year";
   countrate.innerHTML =
     "Christmas pass rate: " + growth.toFixed(1) + " Christmas/Year";
-  upgrade2.innerHTML = "Super Ornament purchased: " + upgradecnt2.toString();
+  upgrade2.innerHTML =
+    "Super Ornament purchased: " + availableItems[1].upgradecnt.toString();
 });
 
 growbt3.addEventListener("click", function () {
-  cnt -= price3;
+  cnt -= availableItems[2].cost;
   growth += 50;
-  upgradecnt3++;
-  price3 *= 1.15;
+  availableItems[2].upgradecnt++;
+  availableItems[2].cost *= 1.15;
   growbt3.textContent =
-    "Ultra Ornament (" + price3.toFixed(2) + " Christmas): +50 Christmas/Year"; 
+    availableItems[2].name +
+    " (" +
+    availableItems[2].cost.toFixed(2) +
+    " Christmas): " +
+    "+" +
+    availableItems[2].rate +
+    " Christmas/Year";
   countrate.innerHTML =
     "Christmas pass rate: " + growth.toFixed(1) + " Christmas/Year";
-  upgrade3.innerHTML = "Ultra Ornament purchased: " + upgradecnt3.toString();
+  upgrade3.innerHTML =
+    "Ultra Ornament purchased: " + availableItems[2].upgradecnt.toString();
 });
 
 //Update runners
@@ -136,17 +198,17 @@ function adder(Millis: number) {
 
 //Checking buttons enabling
 function checker() {
-  if (cnt >= price1) {
+  if (cnt >= availableItems[0].cost) {
     growbt.disabled = false;
   } else {
     growbt.disabled = true;
   }
-  if (cnt >= price2) {
+  if (cnt >= availableItems[1].cost) {
     growbt2.disabled = false;
   } else {
     growbt2.disabled = true;
   }
-  if (cnt >= price3) {
+  if (cnt >= availableItems[2].cost) {
     growbt3.disabled = false;
   } else {
     growbt3.disabled = true;
