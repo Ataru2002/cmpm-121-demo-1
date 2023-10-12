@@ -12,6 +12,7 @@ interface Item {
   cost: number;
   rate: number;
   upgradecnt: number;
+  description: string;
 }
 const availableItems: Item[] = [
   {
@@ -19,18 +20,21 @@ const availableItems: Item[] = [
     cost: 10,
     rate: 0.1,
     upgradecnt: 0,
+    description: "An ornament you buy at a dollar tree"
   },
   {
     name: "Super Ornament",
     cost: 100,
     rate: 2,
     upgradecnt: 0,
+    description: "An ornament you buy at supermarkets"
   },
   {
     name: "Ultra Ornament",
     cost: 1000,
-    rate: 2,
+    rate: 50,
     upgradecnt: 0,
+    description: "An ornament you buy at specialized christmas stores"
   },
 ];
 
