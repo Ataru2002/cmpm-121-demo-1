@@ -11,6 +11,9 @@ let lastMill: number = 0;
 let upgradecnt1: number = 0;
 let upgradecnt2: number = 0;
 let upgradecnt3: number = 0;
+let price1: number = 10;
+let price2: number = 100;
+let price3: number = 1000;
 
 document.title = gameName;
 
@@ -57,30 +60,40 @@ mainbt.addEventListener("click", function () {
 });
 
 growbt.addEventListener("click", function () {
-  cnt -= 10;
+  cnt -= price1;
   growth += 0.1;
   upgradecnt1++;
+  price1 *= 1.15;
+  growbt.textContent = "Regular Ornament (" + price1.toFixed(2) + " Christmas): +0.1 Christmas/Year"; 
   countrate.innerHTML =
     "Christmas pass rate: " + growth.toFixed(1) + " Christmas/Year";
   upgrade1.innerHTML = "Regular Ornament purchased: " + upgradecnt1.toString();
 });
 
 growbt2.addEventListener("click", function () {
-  cnt -= 100;
+  cnt -= price2;
   growth += 2;
   upgradecnt2++;
+  price2 *= 1.15;
+  growbt2.textContent =
+    "Super Ornament (" +
+    price2.toFixed(2) +
+    " Christmas): +2 Christmas/Year"; 
   countrate.innerHTML =
     "Christmas pass rate: " + growth.toFixed(1) + " Christmas/Year";
-  upgrade2.innerHTML = "Regular Ornament purchased: " + upgradecnt2.toString();
+  upgrade2.innerHTML = "Super Ornament purchased: " + upgradecnt2.toString();
 });
 
 growbt3.addEventListener("click", function () {
-  cnt -= 1000;
+  cnt -= price3;
   growth += 50;
   upgradecnt3++;
+  price3 *= 1.15;
+  growbt3.textContent =
+    "Ultra Ornament (" + price3.toFixed(2) + " Christmas): +50 Christmas/Year"; 
   countrate.innerHTML =
     "Christmas pass rate: " + growth.toFixed(1) + " Christmas/Year";
-  upgrade3.innerHTML = "Regular Ornament purchased: " + upgradecnt3.toString();
+  upgrade3.innerHTML = "Ultra Ornament purchased: " + upgradecnt3.toString();
 });
 
 requestAnimationFrame(adder);
@@ -115,17 +128,17 @@ function adder(Millis: number) {
 }
 
 function checker() {
-  if (cnt >= 10) {
+  if (cnt >= price1) {
     growbt.disabled = false;
   } else {
     growbt.disabled = true;
   }
-  if (cnt >= 100) {
+  if (cnt >= price2) {
     growbt2.disabled = false;
   } else {
     growbt2.disabled = true;
   }
-  if (cnt >= 1000) {
+  if (cnt >= price3) {
     growbt3.disabled = false;
   } else {
     growbt3.disabled = true;
